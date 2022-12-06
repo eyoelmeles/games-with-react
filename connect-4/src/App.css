@@ -13,3 +13,7 @@
   padding: 1rem;
   border: 1px solid #ccc;
 }
+
+.col-hover {
+  border: 2px solid red;
+}
