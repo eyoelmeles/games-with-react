@@ -7,8 +7,14 @@ const COLS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 function App() {
   const [turn, setTurn] = useState<'black' | 'white'>('black');
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
+
   function handleHover(index: number) {
     setHoverIndex(index);
+  }
+
+  function handleLogic(index: number) {
+    alert(index);
+    // TODO for the game logic
   }
 
   return (
@@ -18,11 +24,17 @@ function App() {
       <div className="cols">
         {COLS.map((col, index: number) => (
           <div
-            className={`columns ${index === hoverIndex ? 'col-hover' : ''}`}
+            key={col.toString()}
+            className={`column ${index === hoverIndex ? 'col-hover' : ''}`}
             onMouseOver={() => handleHover(index)}
+            onClick={() => handleLogic(index + 1)}
           >
             {ROWS.map((row) => (
-              <p className="rowss">{col}</p>
+              <p
+                key={`${row.toString() + col}`}
+                className="cels"
+                id={`${row.toString() + col}`}
+              ></p>
             ))}
           </div>
         ))}
@@ -30,27 +42,5 @@ function App() {
     </div>
   );
 }
-
-interface ColsProps {
-  row: number;
-}
-
-// table column renders first
-
-const Columns: React.FC<ColsProps> = ({ row }) => {
-  const cols = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-  const getCol = (col: number) => {
-    // TODO Given a single cell column get all the column
-  };
-  return (
-    <tr className="">
-      {cols.map((col) => (
-        <td key={`${row - col}`} className="cells">
-          {col}
-        </td>
-      ))}
-    </tr>
-  );
-};
 
 export default App;
