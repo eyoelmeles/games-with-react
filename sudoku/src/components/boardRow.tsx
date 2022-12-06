@@ -2,10 +2,11 @@ import React from 'react';
 
 interface BoardRowProps {
   row: string;
-  cellValues: Array<number>;
+  cellValues: Array<string>;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const BoardRow: React.FC<BoardRowProps> = ({ row, cellValues }) => {
+const BoardRow: React.FC<BoardRowProps> = ({ row, cellValues, onChange }) => {
   const cols = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   const borderStyle =
@@ -14,10 +15,8 @@ const BoardRow: React.FC<BoardRowProps> = ({ row, cellValues }) => {
       : '';
 
   const getValueOfCell = (id: string, element: number) => {
-    // let index = (parseInt(id) - 1) * 9 + element - 1;
-    // return cellValues[index];
-    console.log(id, element);
-    return '1';
+    let index = (parseInt(id) - 1) * 9 + element - 1;
+    return cellValues[index];
   };
 
   const tdclsName = (index: number) =>
@@ -26,7 +25,7 @@ const BoardRow: React.FC<BoardRowProps> = ({ row, cellValues }) => {
       : 'w-4 h-4 p-1 bg-red-200';
 
   return (
-    <tr className={borderStyle}>
+    <tr className={borderStyle} key={row}>
       {cols.map((element: number) => {
         const tdclsName =
           element % 3 === 1 && element > 1
@@ -34,13 +33,11 @@ const BoardRow: React.FC<BoardRowProps> = ({ row, cellValues }) => {
             : 'border-2 border-slate-50';
 
         return (
-          <td className={tdclsName}>
+          <td className={tdclsName} key={row + element}>
             <input
-              key={row + element}
               value={getValueOfCell(row, element)}
-              placeholder="1"
               className="bg-white w-6 h-6 text-center"
-              onChange={() => {}}
+              onChange={onChange}
             />
           </td>
         );
