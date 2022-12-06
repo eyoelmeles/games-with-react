@@ -31,7 +31,7 @@ const Columns: React.FC<ColsProps> = ({ row }) => {
     // TODO Given a single cell column get all the column
   };
   return (
-    <tr className="col-hover">
+    <tr className="">
       {cols.map((col) => (
         <td key={`${row - col}`} className="cells">
           {col}
