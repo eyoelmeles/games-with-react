@@ -24,10 +24,17 @@
   border: 1px solid #ccc;
 }
 
+.filled-red {
+  background-color: red;
+}
+.filled-blue {
+  background-color: blue;
+}
+
 .cols {
   display: flex;
 }
 
 .col-hover {
-  border: 2px solid red;
+  border: 1px solid red;
 }
